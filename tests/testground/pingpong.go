@@ -6,8 +6,8 @@ import (
 	"net"
 	"time"
 
-	"github.com/brdji/chain-listener/pkg/consumer"
-	"github.com/brdji/chain-listener/pkg/producer"
+	"github.com/brdji/chain-example/pkg/consumer"
+	"github.com/brdji/chain-example/pkg/producer"
 
 	"github.com/testground/sdk-go/network"
 	"github.com/testground/sdk-go/run"

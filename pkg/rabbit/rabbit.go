@@ -4,8 +4,8 @@ import (
 	"log"
 	"time"
 
-	env "github.com/brdji/chain-listener/pkg/env"
-	"github.com/brdji/chain-listener/pkg/util"
+	env "github.com/brdji/chain-example/pkg/env"
+	"github.com/brdji/chain-example/pkg/util"
 
 	"github.com/streadway/amqp"
 )

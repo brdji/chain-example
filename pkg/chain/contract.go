@@ -3,7 +3,7 @@ package chain
 import (
 	"log"
 
-	"github.com/brdji/chain-listener/pkg/contract"
+	"github.com/brdji/chain-example/pkg/contract"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"

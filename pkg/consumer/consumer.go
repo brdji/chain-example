@@ -1,6 +1,6 @@
 package consumer
 
-import "github.com/brdji/chain-listener/pkg/message"
+import "github.com/brdji/chain-example/pkg/message"
 
 type Consumer interface {
 	GetQueueName() string

@@ -6,12 +6,12 @@ import (
 	"math/big"
 	"net/http"
 
-	"github.com/brdji/chain-listener/pkg/chain"
-	"github.com/brdji/chain-listener/pkg/consumer"
-	"github.com/brdji/chain-listener/pkg/env"
-	"github.com/brdji/chain-listener/pkg/producer"
-	"github.com/brdji/chain-listener/pkg/rabbit"
-	"github.com/brdji/chain-listener/pkg/redis"
+	"github.com/brdji/chain-example/pkg/chain"
+	"github.com/brdji/chain-example/pkg/consumer"
+	"github.com/brdji/chain-example/pkg/env"
+	"github.com/brdji/chain-example/pkg/producer"
+	"github.com/brdji/chain-example/pkg/rabbit"
+	"github.com/brdji/chain-example/pkg/redis"
 )
 
 // TODO: store this in redis?

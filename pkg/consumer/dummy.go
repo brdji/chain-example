@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/brdji/chain-listener/pkg/message"
-	"github.com/brdji/chain-listener/pkg/rabbit"
-	"github.com/brdji/chain-listener/pkg/util"
+	"github.com/brdji/chain-example/pkg/message"
+	"github.com/brdji/chain-example/pkg/rabbit"
+	"github.com/brdji/chain-example/pkg/util"
 )
 
 type DummyConsumer struct {

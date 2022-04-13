@@ -1,7 +1,7 @@
 package rabbit
 
 import (
-	"github.com/brdji/chain-listener/pkg/util"
+	"github.com/brdji/chain-example/pkg/util"
 
 	"github.com/streadway/amqp"
 )
