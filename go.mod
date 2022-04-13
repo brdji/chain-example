@@ -1,4 +1,4 @@
-module github.com/brdji/chain-listener
+module github.com/brdji/chain-example
 
 go 1.17
 
