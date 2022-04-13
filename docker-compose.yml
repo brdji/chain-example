@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  chainlistener:
+    image: chainlistener
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8081:8081
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - infra_network
+    env_file:
+      - .env
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - infra_network
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    networks:
+      - infra_network
+networks:
+  infra_network:
+    driver: bridge
