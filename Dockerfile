@@ -15,7 +15,7 @@ RUN apk --no-cache add ca-certificates
 RUN mkdir /app
 COPY --from=builder /go/src/app/build /app
 WORKDIR /app
-RUN chmod +x /app/chain-listener
-ENTRYPOINT /app/chain-listener
+RUN chmod +x /app/chain-example
+ENTRYPOINT /app/chain-example
 LABEL Name=chainlistener Version=0.0.1
 EXPOSE 8081

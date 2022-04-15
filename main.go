@@ -9,6 +9,8 @@ import (
 	"github.com/brdji/chain-example/pkg/chain"
 	"github.com/brdji/chain-example/pkg/consumer"
 	"github.com/brdji/chain-example/pkg/env"
+	"github.com/brdji/chain-example/pkg/listener"
+	"github.com/brdji/chain-example/pkg/processor"
 	"github.com/brdji/chain-example/pkg/producer"
 	"github.com/brdji/chain-example/pkg/rabbit"
 	"github.com/brdji/chain-example/pkg/redis"
@@ -55,26 +57,37 @@ func startServer() {
 	notifyChan := chain.ListenForBlockChanges(chain.ChainClient)
 	go awaitBlockChanges(notifyChan)
 
-	// test consumer and producer
-	p1 := &producer.DummyProducer{
-		IdGen: 0,
-	}
-	p2 := &producer.DummyProducer{
-		IdGen: 10,
-	}
-	consumer := &consumer.DummyConsumer{}
-
-	p1.ProduceMessage("DUMMY PRODUCED DATA")
-	p2.ProduceMessage("DUMMY PRODUCED DATA 2")
-	p2.ProduceMessage("DUMMY PRODUCED DATA 3")
-	p1.ProduceMessage("DUMMY PRODUCED DATA 4")
-	go func() { consumer.ListenForMessages() }()
+	testProcessor()
 
 	port := serverEnv.Port
 	log.Printf("Server started and listening at port %s\n", port)
 
 	listenPort := fmt.Sprintf(":%s", port)
 	log.Fatal(http.ListenAndServe(listenPort, nil))
+}
+
+func testProcessor() {
+	// test consumer and producer
+	p1 := &producer.RabbitProducer{
+		IdGen:     0,
+		QueueName: "TestQueue",
+	}
+	l1 := &listener.RabbitListener{QueueName: "TestQueue"}
+	c1 := &consumer.DummyConsumer{}
+
+	processor := &processor.Processor{
+		Producer: p1,
+		Listener: l1,
+		Consumer: c1,
+	}
+
+	p1.ProduceMessage("DUMMY PRODUCED DATA 1")
+	p1.ProduceMessage("DUMMY PRODUCED DATA 2")
+	p1.ProduceMessage("DUMMY PRODUCED DATA 3")
+	p1.ProduceMessage("DUMMY PRODUCED DATA 4")
+	p1.ProduceMessage("DUMMY PRODUCED DATA 5")
+
+	processor.StartProcessor()
 }
 
 func main() {

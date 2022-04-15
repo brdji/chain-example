@@ -9,15 +9,13 @@ import (
 	"github.com/brdji/chain-example/pkg/util"
 )
 
-type DummyProducer struct {
-	IdGen int32
+// Simple producer that produces messages on a specified RabbitMq queue
+type RabbitProducer struct {
+	IdGen     int32
+	QueueName string
 }
 
-func (prod *DummyProducer) GetQueueName() string {
-	return "dummy-messages"
-}
-
-func (prod *DummyProducer) ProduceMessage(data string) {
+func (prod *RabbitProducer) ProduceMessage(data string) {
 	prod.IdGen++
 	msg := &message.DataMessage{
 		Id:   fmt.Sprint(prod.IdGen),
@@ -27,5 +25,5 @@ func (prod *DummyProducer) ProduceMessage(data string) {
 	jsonData, err := json.Marshal(msg)
 	util.FailOnError(err, "Error producing message")
 
-	rabbit.PublishMessage(prod.GetQueueName(), jsonData)
+	rabbit.PublishMessage(prod.QueueName, jsonData)
 }
